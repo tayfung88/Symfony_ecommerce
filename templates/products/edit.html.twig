@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Products !{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="m-5">
+    <h1>Edit product</h1>
+    {{ form_start(productsForm)}}
+        {{ form_row(productsForm.name) }}
+        {{ form_row(productsForm.price) }}
+        {{ form_row(productsForm.promotion) }}
+        {{ form_row(productsForm.discount) }}
+        {{ form_row(productsForm.image) }}
+        {{ form_row(productsForm.category) }}
+        <button type="submit" class="btn btn-primary">Edit</button>
+    {{ form_end(productsForm)}}
+</div>
+
+{% endblock %}

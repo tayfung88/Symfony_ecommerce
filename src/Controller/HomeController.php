@@ -16,6 +16,9 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(EntityManagerInterface $entityManager)
     {
+        // max products to display
+        $maxProductsToDisplay = 4;
+        
         $promotedProducts = $entityManager->getRepository(Products::class)->findBy(['promotion' => true]);
         $products = $entityManager->getRepository(Products::class)->findAll();
         $categories = $entityManager->getRepository(Categories::class)->findAll();
@@ -23,7 +26,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'promotion' => $promotedProducts,
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'maxProductsToDisplay' => $maxProductsToDisplay
         ]);
     }
 

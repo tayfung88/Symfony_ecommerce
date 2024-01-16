@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User Profile !{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="m-5">
+    <h1>Edit profile</h1>
+    {{ form_start(usersForm)}}
+        {{ form_row(usersForm.email) }}
+        {{ form_row(usersForm.firstname) }}
+        {{ form_row(usersForm.lastname) }}
+        <button type="submit" class="btn btn-primary">Edit</button>
+    {{ form_end(usersForm)}}
+</div>
+
+{% endblock %}

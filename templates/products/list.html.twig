@@ -33,7 +33,7 @@
                     <td>{{ product.price }}</td>
                     <td>{{ product.promotion }}</td>
                     <td>{{ product.discount }}</td>
-                    <td><img src="{{ product.image }}" style="object-fit: cover; width: 100%; height: 50px;"></td>
+                    <td><img src="{{ asset('uploads/images/' ~ product.image) }}" style="object-fit: cover; width: 100%; height: 50px;"></td>
                     <td>
                         <a href="{{ path('app_edit_products', {id: product.id}) }}">Edit</a>
                     </td>

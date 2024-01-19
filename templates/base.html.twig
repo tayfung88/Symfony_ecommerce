@@ -53,6 +53,9 @@
 					</li>
 
 				</ul>
+				{# Cart Button #}
+				<a class="btn btn-success mr-2" href="{{ path('app_cart_index', {id: app.user.id})}}" role="button">Cart</a>
+
 				{# Button Admin Page #}
 				{% if is_granted('ROLE_ADMIN') %}
 					<a class="btn btn-primary mr-2" href="{{ path('app_admin')}}" role="button">Admin</a>

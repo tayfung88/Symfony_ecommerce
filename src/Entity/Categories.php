@@ -87,4 +87,9 @@ class Categories
 
         return $this;
     }
+
+    // Association field (Edit Category EasyAdmin)
+    public function __toString() {
+        return $this->name;
+    }
 }

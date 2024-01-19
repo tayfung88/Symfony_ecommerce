@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart
+{% endblock %}
+
+{% block body %}
+	<main class="container">
+		<section class="row">
+			<div class="col-12">
+				<h1>Cart</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Product(s)</th>
+							<th>Price</th>
+							<th>Quantity</th>
+							<th>Total</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for element in data %}
+							<tr>
+								<td>{{ element.products.name }}</td>
+								<td>{{ element.products.price }}</td>
+								<td>{{ element.quantity }}</td>
+								<td>{{ element.quantity * element.products.price }}
+									€</td>
+								<td>
+									<a href="{{ path('app_cart_add', {id: element.products.id}) }}" class="btn btn-success">+</a>
+									<a href="{{ path('app_cart_remove', {id: element.products.id}) }}" class="btn btn-warning">-</a>
+									<a href="{{ path('app_cart_delete', {id: element.products.id}) }}" class="btn btn-danger">Supprimer</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="5">Your cart is empty</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="3">Total</td>
+							<td>{{ total }}
+								€</td>
+							<td>
+								<a href="{{ path('app_cart_empty') }}" class="btn btn-danger">Empty</a>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</section>
+	</main>
+{% endblock %}

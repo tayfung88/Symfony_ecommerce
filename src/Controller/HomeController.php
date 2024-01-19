@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Products;
 use App\Entity\Categories;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 class HomeController extends AbstractController
@@ -31,6 +32,8 @@ class HomeController extends AbstractController
         ]);
     }
 
+    // Find Products by Category
+    /* 
     #[Route('/category/{id}', name: 'app_category')]
     public function category($id, EntityManagerInterface $entityManager)
     {
@@ -40,6 +43,26 @@ class HomeController extends AbstractController
         return $this->render('category/categories.html.twig', [
             'category' => $category,
             'products' => $productsByCategory
+        ]);
+    }
+    */
+
+    // Pagination on Find Product by Category 
+    #[Route('/category/list/{id}', name: 'app_category')]
+    public function category($id, EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator)
+    {
+        $dql = "SELECT p FROM App\Entity\Products p JOIN p.category c WHERE c.id = :categoryId";
+        $query = $entityManager->createQuery($dql);
+        $query->setParameter('categoryId', $id);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            2
+        );
+
+        return $this->render('category/categorieslist.html.twig', [
+            'pagination' => $pagination
         ]);
     }
 

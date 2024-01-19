@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -27,6 +28,15 @@ class ProductsController extends AbstractController
         ]);
     }
 
+    #[Route('/products/details/{id}', name: 'app_product_details')]
+    public function produtDetails($id, EntityManagerInterface $entityManager): Response
+    {
+        $products = $entityManager->getRepository(Products::class)->find($id);
+
+        return $this->render('products/details.html.twig', [
+            'products' => $products
+        ]);
+    }
 
     #[Route('/products/add', name: 'app_add_products' )]
     public function addProductForm(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response

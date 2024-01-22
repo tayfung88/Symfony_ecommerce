@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block title %}Home
 {% endblock %}
 
 {% block body %}
@@ -17,8 +17,23 @@
 		}
 	</style>
 
+	{# CRUD Flash Message #}
 	{% for message in app.flashes('success') %}
 		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	{# Order Flash Message #}
+	{% for message in app.flashes ('order_success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	{# Empty Cart Flash Message #}
+	{% for message in app.flashes ('cart_empty') %}
+		<div class="alert alert-danger">
 			{{ message }}
 		</div>
 	{% endfor %}

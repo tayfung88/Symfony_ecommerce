@@ -78,7 +78,7 @@ class HomeController extends AbstractController
         $products = $entityManager->getRepository(Products::class)->findAll();
         $categories = $entityManager->getRepository(Categories::class)->findAll();
 
-        return $this->render('navbar.html.twig', [
+        return $this->render('navitem.html.twig', [
             'products' => $products,
             'categories' => $categories
         ]);

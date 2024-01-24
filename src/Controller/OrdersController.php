@@ -54,9 +54,11 @@ class OrdersController extends AbstractController
         $entityManager->persist($order);
         $entityManager->flush();
 
-        $session->remove('cart');
+        // $session->remove('cart');
 
-        $this->addFlash('order_success', 'Order created successfully');
-        return $this->redirectToRoute('app_home');
+        // $this->addFlash('order_success', 'Order created successfully');
+        // return $this->redirectToRoute('app_home');
+
+        return $this->redirectToRoute('app_stripe');
     }
 }

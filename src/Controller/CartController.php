@@ -30,6 +30,42 @@ class CartController extends AbstractController
         return $this->render('cart/index.html.twig', compact('data', 'total'));
     }
 
+    public function getCartTotal(SessionInterface $session, ProductsRepository $productsRepository)
+    {
+        $cart = $session->get('cart', []);
+        
+        $data = [];
+        $total = 0;
+
+        foreach($cart as $id => $quantity) {
+            $products = $productsRepository->find($id);
+            $data[] = [
+                'products' => $products,
+                'quantity' => $quantity
+            ];
+            $total += $products->getPrice() * $quantity;
+        }
+        return $total;
+    }
+
+    public function getCartDescription(SessionInterface $session, ProductsRepository $productsRepository)
+    {
+        $cart = $session->get('cart', []);
+        
+        $data = [];
+        $total = 0;
+
+        foreach($cart as $id => $quantity) {
+            $products = $productsRepository->find($id);
+            $data[] = [
+                'products' => $products,
+                'quantity' => $quantity
+            ];
+            $total += $products->getPrice() * $quantity;
+        }
+        return $data;
+    }
+
     #[Route('/add/{id}', name: 'add')]
     public function addCart(Products $products, SessionInterface $session)
     {
